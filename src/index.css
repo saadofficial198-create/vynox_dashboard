@@ -1,0 +1,191 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ── VYNOX Design Tokens ── */
+:root {
+  --bg-base:      #0A1628;
+  --bg-card:      #0D1F3C;
+  --bg-card-hover:#0f2548;
+  --bg-sidebar:   #060f1e;
+  --border:       #1a2f52;
+  --border-glow:  #00FF8830;
+
+  --accent:       #00FF88;
+  --accent-dim:   #00FF8820;
+  --accent-glow:  0 0 20px #00FF8840;
+
+  --warning:      #FF6B35;
+  --warning-dim:  #FF6B3520;
+  --danger:       #FF2D55;
+  --danger-dim:   #FF2D5520;
+  --info:         #00B4FF;
+  --info-dim:     #00B4FF20;
+
+  --text-primary:   #E8F4FF;
+  --text-secondary: #7A9CC4;
+  --text-muted:     #3A5A84;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-sidebar); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── Cards ── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.card:hover { border-color: var(--border-glow); }
+
+/* ── Accent glow text ── */
+.accent { color: var(--accent); }
+.text-warning { color: var(--warning); }
+.text-danger  { color: var(--danger); }
+.text-info    { color: var(--info); }
+.text-muted   { color: var(--text-secondary); }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 8px; font-size: 13px;
+  font-weight: 600; cursor: pointer; border: none;
+  transition: all 0.15s ease; white-space: nowrap;
+}
+.btn-accent {
+  background: var(--accent); color: #0A1628;
+  box-shadow: var(--accent-glow);
+}
+.btn-accent:hover { background: #00e87a; transform: translateY(-1px); }
+.btn-ghost {
+  background: transparent; color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn-danger { background: var(--danger-dim); color: var(--danger); border: 1px solid var(--danger); }
+.btn-danger:hover { background: var(--danger); color: #fff; }
+.btn-sm { padding: 5px 10px; font-size: 12px; }
+
+/* ── Badges ── */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+}
+.badge-critical { background: var(--danger-dim);  color: var(--danger);  border: 1px solid var(--danger); }
+.badge-warning  { background: var(--warning-dim); color: var(--warning); border: 1px solid var(--warning); }
+.badge-info     { background: var(--info-dim);    color: var(--info);    border: 1px solid var(--info); }
+.badge-success  { background: var(--accent-dim);  color: var(--accent);  border: 1px solid var(--accent); }
+.badge-muted    { background: #1a2f52; color: var(--text-secondary); border: 1px solid var(--border); }
+
+/* ── Table ── */
+.vynox-table { width: 100%; border-collapse: collapse; }
+.vynox-table th {
+  text-align: left; padding: 10px 14px;
+  color: var(--text-muted); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.vynox-table td {
+  padding: 12px 14px; border-bottom: 1px solid #0f1e35;
+  color: var(--text-primary); font-size: 13px;
+}
+.vynox-table tr:last-child td { border-bottom: none; }
+.vynox-table tbody tr { transition: background 0.15s; }
+.vynox-table tbody tr:hover { background: #0f2040; }
+
+/* ── Inputs ── */
+.vynox-input {
+  background: #060f1e; border: 1px solid var(--border);
+  color: var(--text-primary); border-radius: 8px;
+  padding: 9px 12px; font-size: 13px; width: 100%;
+  outline: none; font-family: 'Inter', sans-serif;
+  transition: border-color 0.15s;
+}
+.vynox-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+.vynox-input::placeholder { color: var(--text-muted); }
+
+select.vynox-input option { background: #0D1F3C; }
+
+/* ── Status dots ── */
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.dot-online   { background: var(--accent);  box-shadow: 0 0 8px var(--accent); }
+.dot-offline  { background: var(--text-muted); }
+.dot-warning  { background: var(--warning); box-shadow: 0 0 8px var(--warning); }
+.dot-critical { background: var(--danger);  box-shadow: 0 0 8px var(--danger); animation: pulse-red 1.5s infinite; }
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 6px var(--danger); }
+  50%       { box-shadow: 0 0 16px var(--danger); }
+}
+
+/* ── Modal backdrop ── */
+.modal-backdrop {
+  position: fixed; inset: 0; background: #000000bb;
+  backdrop-filter: blur(4px); z-index: 50;
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-box {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; width: 100%; max-width: 480px; padding: 28px;
+  animation: modal-in 0.2s ease;
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Score ring color ── */
+.score-high   { color: var(--accent); }
+.score-medium { color: var(--warning); }
+.score-low    { color: var(--danger); }
+
+/* ── Page fade-in ── */
+.page-enter { animation: fade-up 0.25s ease; }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Sidebar nav item ── */
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 9px; cursor: pointer;
+  color: var(--text-secondary); font-size: 13px; font-weight: 500;
+  transition: all 0.15s; text-decoration: none; margin-bottom: 2px;
+}
+.nav-item:hover { background: var(--accent-dim); color: var(--accent); }
+.nav-item.active { background: var(--accent-dim); color: var(--accent); border-left: 3px solid var(--accent); padding-left: 11px; }
+
+/* ── Glow divider ── */
+.glow-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.3; margin: 16px 0;
+}
+
+/* ── VynoxSelect dropdown animation ── */
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Extra aliases for components ── */
+:root {
+  --card-bg:    var(--bg-card);
+  --sidebar-bg: var(--bg-sidebar);
+}
