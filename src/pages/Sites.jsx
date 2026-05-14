@@ -254,10 +254,10 @@ export default function Sites({ onRefreshRef }) {
               </div>
               <div>
                 <label style={{ fontSize: 12, color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: 6 }}>Scan Token *</label>
-                <input className="vynox-input" placeholder="Paste scan token from VYNOX plugin settings"
+                <input className="vynox-input vynox-monospace" placeholder="Paste from: WP Admin → VYNOX Plugin → Settings → Scan Token"
                   value={form.scan_token} onChange={e => setForm(f => ({ ...f, scan_token: e.target.value }))} required />
                 <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4 }}>
-                  Found in: WordPress Admin → VYNOX Plugin → Settings → Scan Token
+                  Copy from your WordPress site's VYNOX plugin settings page
                 </div>
               </div>
               <div style={{ display: 'flex', gap: 10, marginTop: 6 }}>
