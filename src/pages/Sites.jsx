@@ -76,7 +76,7 @@ export default function Sites({ onRefreshRef }) {
   const [sites,      setSites]      = useState([]);
   const [loading,    setLoading]    = useState(true);
   const [modal,      setModal]      = useState(false);
-  const [form,       setForm]       = useState({ domain: '', name: '' });
+  const [form,       setForm]       = useState({ domain: '', name: '', scan_token: '' });
   const [saving,     setSaving]     = useState(false);
   const [copied,     setCopied]     = useState(null);
   const [newSite,    setNewSite]    = useState(null);
@@ -99,7 +99,7 @@ export default function Sites({ onRefreshRef }) {
     try {
       const r = await api.registerSite(form);
       setNewSite(r.data);
-      setForm({ domain: '', name: '' });
+      setForm({ domain: '', name: '', scan_token: '' });
       setModal(false);
       load();
       toast.success(`Site registered: ${r.data.domain}`);
@@ -251,6 +251,14 @@ export default function Sites({ onRefreshRef }) {
                 <label style={{ fontSize: 12, color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: 6 }}>Site Name (optional)</label>
                 <input className="vynox-input" placeholder="My Shop"
                   value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+              </div>
+              <div>
+                <label style={{ fontSize: 12, color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: 6 }}>Scan Token *</label>
+                <input className="vynox-input" placeholder="Paste scan token from VYNOX plugin settings"
+                  value={form.scan_token} onChange={e => setForm(f => ({ ...f, scan_token: e.target.value }))} required />
+                <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4 }}>
+                  Found in: WordPress Admin → VYNOX Plugin → Settings → Scan Token
+                </div>
               </div>
               <div style={{ display: 'flex', gap: 10, marginTop: 6 }}>
                 <button type="submit" className="btn btn-accent" style={{ flex: 1 }} disabled={saving}>
