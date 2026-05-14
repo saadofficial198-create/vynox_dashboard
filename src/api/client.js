@@ -4,7 +4,7 @@ import axios from 'axios';
 const client = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
   headers: { 'x-api-key': import.meta.env.VITE_MASTER_KEY || 'vynox-master-2026' },
-  timeout: 10000,
+  timeout: 30000,
 });
 
 client.interceptors.response.use(
@@ -42,10 +42,10 @@ export const api = {
   getAllScanLogs:  ()       => client.get('/api/scan-logs'),
 
   // Backups
-  getBackups:     (id)     => client.get(`/api/backups/${id}`),
+  getBackups:     (id)     => client.get(`/api/backups/${id}`).catch(e => e.response?.status === 404 ? { data: { backup: null } } : Promise.reject(e)),
 
   // Products
-  getProducts:    (id, p)  => client.get(`/api/products/${id}`, { params: p }),
+  getProducts:    (id, p)  => client.get(`/api/products/${id}`, { params: p }).catch(e => e.response?.status === 404 ? { data: { products: [], total: 0 } } : Promise.reject(e)),
 
   // Scan trigger
   triggerScan:    (id, scanType) => client.post(`/api/scan/${id}`, { scanType }),
